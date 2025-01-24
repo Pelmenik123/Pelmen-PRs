@@ -1,6 +1,7 @@
 /obj/structure/flora
 	resistance_flags = FLAMMABLE
 	max_integrity = 150
+	
 
 //trees
 /obj/structure/flora/tree
@@ -9,7 +10,14 @@
 	density = TRUE
 	pixel_x = -16
 	layer = 9
+	var/wood_give = 20
 
+/obj/structure/flora/tree/Destroy(force)
+	
+	new /obj/item/stack/sheet/wood(loc, wood_give)
+	. = ..(force)
+
+	
 /obj/structure/flora/tree/pine
 	name = "pine tree"
 	icon = 'icons/obj/flora/pinetrees.dmi'
@@ -20,6 +28,7 @@
 	. = ..()
 	if(randomize_tree)
 		icon_state = "pine_[rand(1, 3)]"
+	wood_give = rand(25, 50)
 
 /obj/structure/flora/tree/pine/xmas
 	name = "xmas tree"
@@ -34,6 +43,7 @@
 /obj/structure/flora/tree/dead/Initialize(mapload)
 	. = ..()
 	icon_state = "tree_[rand(1, 6)]"
+	wood_give = rand(10, 30)
 
 /obj/structure/flora/tree/palm
 	icon = 'icons/misc/beach2.dmi'

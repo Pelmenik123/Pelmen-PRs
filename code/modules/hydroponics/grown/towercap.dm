@@ -166,6 +166,8 @@
 	anchored = TRUE
 	buckle_lying = 0
 	pass_flags_self = PASSTABLE|LETPASSTHROW
+
+	var/fuel_wood = 100
 	var/rod_installed = FALSE
 	var/burning = FALSE
 	var/lighter // Who lit the fucking thing
@@ -203,6 +205,10 @@
 	if(user.a_intent == INTENT_HARM)
 		return ..()
 
+	if(istype(I, /obj/item/stack/sheet/wood))
+		var/obj/item/stack/prom = I
+		fuel_wood += prom.amount * 10
+		del(I)
 	if(istype(I, /obj/item/stack/rods))
 		add_fingerprint(user)
 		var/obj/item/stack/rods/rods = I
@@ -259,7 +265,7 @@
 
 /obj/structure/bonfire/proc/StartBurning()
 	. = FALSE
-	if(!burning && CheckOxygen())
+	if(!burning && CheckOxygen() && (fuel_wood > 0))
 		. = TRUE
 		burning = TRUE
 		update_icon(UPDATE_ICON_STATE)
@@ -298,10 +304,20 @@
 			L.adjust_fire_stacks(fire_stack_strength)
 			L.IgniteMob()
 
+/obj/structure/bonfire/proc/Heat_mobs()
+	for(var/mob/living/target in range(3, loc))
+		target.adjust_bodytemperature(3)
+
 /obj/structure/bonfire/process()
+	if(fuel_wood > 0) 
+		fuel_wood -= 5
+	if(!fuel_wood)
+		extinguish()
+		return
 	if(!CheckOxygen())
 		extinguish()
 		return
+	Heat_mobs()
 	Burn()
 
 /obj/structure/bonfire/extinguish()

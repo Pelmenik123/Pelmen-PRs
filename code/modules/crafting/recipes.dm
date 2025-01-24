@@ -792,8 +792,8 @@
 
 /datum/crafting_recipe/bonfire
 	name = "Bonfire"
-	time = 60
-	reqs = list(/obj/item/grown/log = 5)
+	time = 55
+	reqs = list(/obj/item/stack/sheet/wood = 10)
 	result = /obj/structure/bonfire
 	category = CAT_PRIMAL
 	alert_admins_on_craft = TRUE

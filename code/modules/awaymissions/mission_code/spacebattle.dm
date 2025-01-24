@@ -181,7 +181,7 @@
 /area/awaymission/spacebattle/sec_storage
 	name = "\improper Secure Storage"
 
-// Записочки
+// ЗаписОчка
 
 /obj/item/paper/spacebattle
 	icon = 'icons/obj/bureaucracy.dmi';
