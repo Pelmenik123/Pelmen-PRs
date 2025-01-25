@@ -1986,6 +1986,7 @@
 #include "code\modules\client\preference\loadout\loadout_tgui.dm"
 #include "code\modules\client\preference\loadout\loadout_uniform.dm"
 #include "code\modules\clothing\clothing.dm"
+#include "code\modules\clothing\winter_update_killyourself.dm"
 #include "code\modules\clothing\chameleon\_chameleon_actions.dm"
 #include "code\modules\clothing\chameleon\chameleon_actions_subtypes.dm"
 #include "code\modules\clothing\chameleon\generic_chameleon_clothing.dm"
