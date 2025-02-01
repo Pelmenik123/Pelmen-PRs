@@ -306,7 +306,7 @@
 
 /obj/structure/bonfire/proc/Heat_mobs()
 	for(var/mob/living/target in range(3, loc))
-		target.adjust_bodytemperature(3)
+		target.adjust_bodytemperature(rand(2, 10))
 
 /obj/structure/bonfire/process()
 	if(fuel_wood > 0) 
