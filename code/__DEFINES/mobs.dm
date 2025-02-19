@@ -211,6 +211,7 @@
 #define isunathi(A) (is_species(A, /datum/species/unathi))
 #define isashwalker(A) (is_species(A, /datum/species/unathi/ashwalker))
 #define isashwalkershaman(A) (is_species(A, /datum/species/unathi/ashwalker/shaman))
+#define isdraconid(A) (is_species(A, /datum/species/unathi/draconid))
 #define istajaran(A) (is_species(A, /datum/species/tajaran))
 #define isvulpkanin(A) (is_species(A, /datum/species/vulpkanin))
 #define isskrell(A) (is_species(A, /datum/species/skrell))
@@ -335,6 +336,8 @@
 #define hasorgans(A)	(iscarbon(A))
 
 #define is_admin(user)	(check_rights(R_ADMIN, 0, (user)) != 0)
+
+#define is_developer(user) (check_rights(R_VIEWRUNTIMES, FALSE, user)
 
 #define SLEEP_CHECK_DEATH(A, X) \
 	sleep(X); \
