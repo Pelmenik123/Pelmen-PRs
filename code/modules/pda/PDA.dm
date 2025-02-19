@@ -5,7 +5,17 @@
 
 /// Global list of all PDAs in the world
 GLOBAL_LIST_EMPTY(PDAs)
-
+//authorization log
+GLOBAL_LIST_EMPTY(name_to_PDAs)
+//Helpers
+/obj/item/pda/proc/inject_to_authorization_log()
+	if(GLOB.name_to_PDAs?[owner])
+		GLOB.name_to_PDAs?[owner] += src
+	else
+		GLOB.name_to_PDAs?[owner] = list(src)
+/obj/item/pda/proc/remove_from_authorization_log()
+	if(GLOB.name_to_PDAs?[owner])
+		LAZYREMOVE(GLOB.name_to_PDAs[owner], src)
 
 /obj/item/pda
 	name = "PDA"
@@ -121,6 +131,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda/Destroy()
 	GLOB.PDAs -= src
+	remove_from_authorization_log()
 	var/T = get_turf(loc)
 	if(id)
 		id.forceMove(T)
@@ -321,6 +332,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 
 /obj/item/pda/update_name(updates = ALL)
+	remove_from_authorization_log()
 	. = ..()
 	if((ownjob || fakejob) && custom_name)
 		name = "[custom_name] ([fakejob ? fakejob : ownjob])"
@@ -330,7 +342,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		name = "PDA-[owner] ([ownjob])"
 	else
 		name = initial(name)
-
+	inject_to_authorization_log()
 
 /obj/item/pda/update_desc(updates = ALL)
 	. = ..()
