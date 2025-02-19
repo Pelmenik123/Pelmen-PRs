@@ -330,9 +330,12 @@ GLOBAL_LIST_EMPTY(name_to_PDAs)
 		return TRUE
 	return FALSE
 
+/obj/item/pda/proc/update_owner_name(new_name)
+	remove_from_authorization_log()
+	owner = new_name
+	inject_to_authorization_log()
 
 /obj/item/pda/update_name(updates = ALL)
-	remove_from_authorization_log()
 	. = ..()
 	if((ownjob || fakejob) && custom_name)
 		name = "[custom_name] ([fakejob ? fakejob : ownjob])"
@@ -342,7 +345,6 @@ GLOBAL_LIST_EMPTY(name_to_PDAs)
 		name = "PDA-[owner] ([ownjob])"
 	else
 		name = initial(name)
-	inject_to_authorization_log()
 
 /obj/item/pda/update_desc(updates = ALL)
 	. = ..()
@@ -459,7 +461,7 @@ GLOBAL_LIST_EMPTY(name_to_PDAs)
 			to_chat(user, span_warning("The PDA rejects empty ID card."))
 			return ATTACK_CHAIN_PROCEED
 		if(!owner)
-			owner = id_card.registered_name
+			update_owner_name(id_card.registered_name)
 			ownjob = id_card.assignment
 			ownrank = id_card.rank
 			update_appearance(UPDATE_NAME)
