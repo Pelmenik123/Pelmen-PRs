@@ -15,6 +15,7 @@ GLOBAL_LIST_EMPTY(name_to_PDAs)
 		GLOB.name_to_PDAs?[owner] += src
 	else
 		GLOB.name_to_PDAs?[owner] = list(src)
+
 /obj/item/pda/proc/remove_from_authorization_log()
 	if(GLOB.name_to_PDAs?[owner])
 		LAZYREMOVE(GLOB.name_to_PDAs[owner], src)
