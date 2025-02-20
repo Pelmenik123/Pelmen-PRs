@@ -7,6 +7,7 @@
 GLOBAL_LIST_EMPTY(PDAs)
 //authorization log
 GLOBAL_LIST_EMPTY(name_to_PDAs)
+
 //Helpers
 /obj/item/pda/proc/inject_to_authorization_log()
 	if(GLOB.name_to_PDAs?[owner])
