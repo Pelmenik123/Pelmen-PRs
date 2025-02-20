@@ -5,6 +5,7 @@
 
 /// Global list of all PDAs in the world
 GLOBAL_LIST_EMPTY(PDAs)
+
 //authorization log
 GLOBAL_LIST_EMPTY(name_to_PDAs)
 
